@@ -136,13 +136,117 @@ img.add_border {
     <div id="tipue_search_content">記憶體的歷史 << <a href='記憶體的歷史.html'>Previous</a> <a href='安裝記憶體模組.html'>Next</a> >> 安裝記憶體模組<br /><h1>記憶體同位位元</h1>
 <p>內存模塊的頻寬由可傳輸的位數決定。 內存最初以8位形式出現，但在當前系統中已增加到16位，32位和現在的64位。 必須以存儲體的形式添加內存，以確保其<span>頻寬</span>等於內存總線的<span>頻寬</span>。 例如，如果您需要64位，而單個模塊提供64位，則庫中將只有一個模塊。 如前所述，雙通道內存需要兩倍的存儲量，因此存儲庫中需要兩個64位（128位）DIMM，而三通道則需要三個。</p>
 <p style="text-align: center;"><img alt="Representation of 1byte      characters (numbers 1,2, and 3)in binary code." class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image6.png" title="Representation of 1byte      characters (numbers 1,2, and 3)in binary code."/></p>
-<h4 style="text-align: left;">機偶性和修正錯誤記憶體</h4>
+<h4 style="text-align: left;">奇偶效驗位和修正錯誤記憶體</h4>
 <p>奇偶校驗用於執行基本的錯誤檢查並確保內存內容可靠。此內存比非奇偶校驗慢，但增加了服務器和某些台式機工作站所需的可靠性。</p>
 <p>奇偶校驗是一種檢測內存錯誤的相當簡單的方法，沒有任何校正功能。奇偶校驗在添加到傳輸數據字符串的單個數據位中表示。如果模塊通常具有七個數據位，則將八分之一添加為奇偶校驗位。如果模塊通常有八個芯片用於數據，則將第九個芯片用於奇偶校驗。</p>
 <p>每個字節都有一個與之關聯的奇偶校驗位。在七位組成原始數據的情況下，總共傳輸了八位（七位原始數據位加一個奇偶校驗位）。在八位組成原始數據的情況下，總共傳輸九位（八位數據位加一位奇偶校驗位）。奇偶校驗位在寫入時設置，然後在讀取時進行計算和比較，以確定自存儲數據以來是否有任何位發生了更改。這種類型的檢查僅限於檢測單個位錯誤。如果更改了兩位，則奇偶校驗將“通過”，並且允許該錯誤可能破壞數據。</p>
 <p>奇偶校驗可以實現為“ 0”奇偶校驗或“ 1”奇偶校驗。存儲字節時，將加零（如果選擇了“ 1”奇偶校驗，則為零）的數目。結果存儲在奇偶校驗位中-如果為奇數，則為“ 1”；如果為偶數，則為“ 0”。當從內存中讀取該字節時，將再次對這些位進行計數，並將結果與奇偶校驗位中存儲的結果進行比較。匹配表示數據從存儲時起就沒有改變（或者以結果相同的方式更改了兩位）。</p>
 <p>不管發送的原始數據位數如何，確定奇偶校驗位的過程都是相同的。通常，原始數據有七位或八位。</p>
-<p>奇偶校驗位是通過對數據字符串中“ 1”位的數量進行計數來確定的。</p><br />記憶體的歷史 << <a href='記憶體的歷史.html'>Previous</a> <a href='安裝記憶體模組.html'>Next</a> >> 安裝記憶體模組</div>
+<p>奇偶校驗位是通過對數據字符串中“ 1”位的數量進行計數來確定的。</p>
+<table style="width: 408px;">
+<tbody>
+<tr style="height: 14.8864px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;"></td>
+<td colspan="2" style="width: 172px; height: 14.8864px; border-color: #000000; background-color: #e1f7ff; text-align: center;">將奇偶校驗位設置為：</td>
+</tr>
+<tr style="height: 14px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;"></td>
+<td style="width: 172px; height: 14px; border-color: #000000; background-color: #e1f7ff; text-align: center;">偶同位</td>
+<td style="width: 172px; height: 14px; border-color: #000000; background-color: #e1f7ff; text-align: center;"><span>奇同位</span></td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;">偶數個1位元</td>
+<td style="width: 111.273px; height: 15px; text-align: center;">0</td>
+<td style="width: 103.727px; height: 15px; text-align: center;">1</td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;"><span>奇數個1位元</span></td>
+<td style="width: 111.273px; height: 15px; text-align: center;">1</td>
+<td style="width: 103.727px; height: 15px; text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left;">範例:</p>
+<p style="text-align: left;">使用偶校驗發送八位原始數據11110000。 要確定奇偶校驗位（數據的第9位），請計算數據字符串中“ 1”位的數量。 在這種情況下，有四個“ 1”位。 因為“ 1”位的總數是四，所以數據是偶數。 因此，奇偶校驗位設置為0。</p>
+<p style="text-align: center;"><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image17.png"/></p>
+<p style="text-align: left;"><span>範例:</span></p>
+<p style="text-align: left;"><span>使用奇偶校驗傳輸七位原始數據1000010。 要確定奇偶校驗位（數據的第八位），請計算數據串中“ 1”位的數量。 在這種情況下，有兩個“ 1”位。 因此，將奇偶校驗位設置為1，因為數據中“ 1”位（兩個）的總數是偶數，這與傳輸的奇數奇偶校驗不匹配。 由於“ 1”位的數量和奇偶校驗設置（奇數）不匹配，因此必須將奇偶校驗位設置為1。由於“ 1”位的總數為2，因此將奇偶校驗位“ 1”添加到 該字符串將在整個八位字符串（七個數據位加一個奇偶校驗位）中產生奇數個“ 1”位（三個）。</span></p>
+<p style="text-align: center;"><span><img height="76" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image18.png" width="448"/></span></p>
+<p style="text-align: left;"><span>由於所有軟錯誤中大約90％是單比特類型的，因此奇偶校驗通常在大多數情況下就足夠了。 不幸的是，由於要花費額外的時脈來計算，存儲和獲取奇偶校驗位，因此錯誤檢查要付出一定的代價，這會稍微降低性能。 另一個考慮因素是，由於無法通過奇偶校驗解決錯誤，因此實際上必須停止應用程序，並發出一條錯誤消息，指出遇到奇偶校驗錯誤。</span></p>
+<table class="table labeled" id="N10711_bx">
+<tbody>
+<tr>
+<td>
+<table align="center" cellspacing="0" class="wbtable" lang="" style="width: 556px;">
+<thead>
+<tr style="height: 28.6137px;">
+<th lang="" style="background-color: #e1f7ff; height: 28.6137px; width: 63px;">原始數據</th>
+<th lang="" style="background-color: #e1f7ff; height: 28.6137px; width: 82px;">Count of “1” bits</th>
+<th colspan="2" lang="" style="background-color: #e1f7ff; height: 28.6137px; width: 393px;">傳輸的位元（8位或9位，取決於原始位的數量），包括奇偶校驗</th>
+</tr>
+<tr style="height: 28px;">
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 63px;"></th>
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 82px;"></th>
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 203.818px;"><span>偶同位</span></th>
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 189.182px;"><span>奇同位</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="e" style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">0000000</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">0</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">00000000</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">00000001</td>
+</tr>
+<tr style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">0101101</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">4</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">01011010</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">01011011</td>
+</tr>
+<tr class="e" style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">0101010</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">3</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">01010101</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">01010100</td>
+</tr>
+<tr style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">10000000</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">1</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">10000001</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">100000000</td>
+</tr>
+<tr class="e" style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">11111100</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">6</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">111111000</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">111111001</td>
+</tr>
+<tr style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">10001100</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">3</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">100011001</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">100011000</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left;">錯誤更正碼（ECC）使奇偶校驗概念更進一步，不僅可以識別錯誤，還可以糾正問題。 要確定是否由於奇偶校驗而對原始數據進行了校正或更改，請檢查完整的傳輸數據字符串，包括奇偶校驗位。</p>
+<p style="text-align: left;">範例:</p>
+<p style="text-align: left;">使用偶校驗發送111100000。 要確定是否在傳輸過程中更改了內存，請計算數據字符串中包括奇偶校驗位的“ 1”位的數量。 在這種情況下，有四個“ 1”位。 由於數據中的“ 1”位（四位）總數為偶數，與傳輸的偶數奇偶校驗相匹配，因此未更改任何存儲器。</p>
+<p style="text-align: center;"><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image19.png"/></p>
+<p><span>範例:</span></p>
+<p><span>使用奇偶校驗發送10000100。 要確定是否在傳輸過程中更改了內存，請計算數據字符串中包括奇偶校驗位的“ 1”位的數量。 在這種情況下，有兩個“ 1”位。 數據中“ 1”位的總數（兩個）是偶數，與傳輸的奇數奇偶校驗不匹配。 因此，內存已更改。</span></p>
+<p style="text-align: center;"><span><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image20.png"/></span></p>
+<h4 style="text-align: left;"><span>單面和雙面存儲器</span></h4>
+<p>內存可以是單面或雙面的。 雙面模塊的好處在於，單個芯片和單個插槽中可以容納更多的存儲空間。 有些主板支持雙面SIMM，而其他主板則不支持，因此查看主板手冊以獲取指導很重要。 要確定模塊是否雙面，只需查看一下雙面即可。 如果芯片的兩面都焊接，則為雙面SIMM。</p>
+<p style="text-align: center;"></p>
+<p style="text-align: center;"></p>
+<p style="text-align: center;"></p>
+<p style="text-align: center;"></p><br />記憶體的歷史 << <a href='記憶體的歷史.html'>Previous</a> <a href='安裝記憶體模組.html'>Next</a> >> 安裝記憶體模組</div>
         
     <!-- footer -->
       <div class="container">
