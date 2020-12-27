@@ -134,6 +134,54 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">配置系統BIOS << <a href='配置系統BIOS.html'>Previous</a> <a href='BIOS更新.html'>Next</a> >> BIOS更新<br /><h1>啟動自我檢測和錯誤報告</h1>
+<p><span>      </span>開機時，POST（開機自檢）是計算機基本輸入/輸出系統（或“啟動程序”）運行以確定計算機鍵盤，隨機存取存儲器，磁盤驅動器的診斷測試順序。 ，並且其他硬件運行正常。 POST是BIOS在引導時執行的初始測試。 POST的作用是查找硬件錯誤，並報告這些錯誤。 POST檢查以下內容：</p>
+<p><span>●</span>CPU和部分BIOS<br/><span>●</span>系統時間<br/><span>●</span>視頻顯示卡<br/><span>●</span>記憶<br/><span>●</span>鍵盤<br/><span>●</span>磁盤驅動器</p>
+<p><span>      </span>如果檢測到必要的硬件並發現其運行正常，則計算機將開始啟動。如果未檢測到硬件或發現硬件運行不正常，BIOS將發出錯誤消息。根據問題的性質，此錯誤消息可能是顯示屏上的文本和/或一系列編碼的嗶聲。由於POST在激活計算機的視頻卡之前運行，因此可能無法進入顯示屏幕。嗶聲的模式可以是可變數目的短嗶聲，也可以是長短嗶聲的混合，具體取決於安裝的BIOS類型。嗶聲的模式包含有關所檢測問題性質的消息。例如，如果未檢測到鍵盤，則特定的嗶嗶聲將告知您該事實。在POST中發現的錯誤通常是致命的（也就是說，它導致當前程序停止運行），並且將終止引導過程，因為檢查的硬件對於計算機的功能絕對必要。</p>
+<p><span>      </span>嗶聲的模式類似於摩爾斯電碼。嗶聲的數量和順序具有計算機製造商設定的含義。因此，每個嗶嗶聲的含義因製造商而異。包含一些AMI和Dell嗶聲代碼的圖表如下所示。</p>
+<h4>代碼比較表</h4>
+<table align="center" cellspacing="0" class="wbtable" lang="">
+<thead>
+<tr style="height: 14px;">
+<th align="center" lang="" style="background-color: #d7f5fc; height: 14px;"><em lang="">BEEP CODE</em></th>
+<th align="center" lang="" style="background-color: #d7f5fc; height: 14px;"><em lang="">AMI</em></th>
+<th align="center" lang="" style="background-color: #d7f5fc; height: 14px;"><em lang="">DELL</em></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">1</td>
+<td lang="" style="height: 14px;">DRAM refresh failure</td>
+<td lang="" style="height: 14px;">BIOS ROM corruption or failure</td>
+</tr>
+<tr class="e" style="height: 14.7046px;">
+<td align="center" lang="" style="height: 14.7046px;">2</td>
+<td lang="" style="height: 14.7046px;">Parity circuit failure</td>
+<td lang="" style="height: 14.7046px;">RAM not detected</td>
+</tr>
+<tr style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">3</td>
+<td lang="" style="height: 14px;">Base 64K RAM failure</td>
+<td lang="" style="height: 14px;">Motherboard failure</td>
+</tr>
+<tr class="e" style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">4</td>
+<td lang="" style="height: 14px;">System timer failure</td>
+<td lang="" style="height: 14px;">RAM failure</td>
+</tr>
+<tr style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">5</td>
+<td lang="" style="height: 14px;">Process failure</td>
+<td lang="" style="height: 14px;">CMOS battery failure</td>
+</tr>
+</tbody>
+</table>
+<p>範例</p>
+<p>嗶聲代碼<br/>這是有問題的計算機發出的嗶嗶代碼示例：</p>
+<p><span>      </span>此蜂鳴聲代碼包含兩個短蜂鳴聲。 這個POST嗶嗶聲序列是什麼意思？ 這取決於BIOS的製造商。</p>
+<p><span>      </span>使用搜索引擎搜索“ AMI嗶聲代碼”。 這可能是典型的結果。 該網站告訴我們，在AMI計算機上，兩聲短促的嗶嗶聲表示內存奇偶校驗錯誤。</p>
+<p><span>      </span>現在搜索“ AST Research BIOS嗶聲代碼”。 這是一個典型的結果。 該網站告訴我們，在AST Research BIOS計算機上，兩聲短促的嗶嗶聲表示鍵盤控制器緩衝區故障。</p>
+<p><span>      </span>如果在Internet上搜索“ IBM bios嗶聲代碼”，則表明該嗶聲代碼指示POST錯誤，因此您應該在屏幕上查看錯誤代碼。</p>
+<p><span>      </span>在POST期間診斷問題時，了解BIOS製造商很重要，因為嗶嗶代碼的含義因製造商而異。</p>
 <br />配置系統BIOS << <a href='配置系統BIOS.html'>Previous</a> <a href='BIOS更新.html'>Next</a> >> BIOS更新</div>
         
     <!-- footer -->

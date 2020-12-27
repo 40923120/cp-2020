@@ -180,16 +180,206 @@
 <p></p><h3>記憶體同位位元</h3>
 <p>內存模塊的頻寬由可傳輸的位數決定。 內存最初以8位形式出現，但在當前系統中已增加到16位，32位和現在的64位。 必須以存儲體的形式添加內存，以確保其<span>頻寬</span>等於內存總線的<span>頻寬</span>。 例如，如果您需要64位，而單個模塊提供64位，則庫中將只有一個模塊。 如前所述，雙通道內存需要兩倍的存儲量，因此存儲庫中需要兩個64位（128位）DIMM，而三通道則需要三個。</p>
 <p style="text-align: center;"><img alt="Representation of 1byte      characters (numbers 1,2, and 3)in binary code." class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image6.png" title="Representation of 1byte      characters (numbers 1,2, and 3)in binary code."/></p>
-<h4 style="text-align: left;">機偶性和修正錯誤記憶體</h4>
+<h4 style="text-align: left;">奇偶效驗位和修正錯誤記憶體</h4>
 <p>奇偶校驗用於執行基本的錯誤檢查並確保內存內容可靠。此內存比非奇偶校驗慢，但增加了服務器和某些台式機工作站所需的可靠性。</p>
 <p>奇偶校驗是一種檢測內存錯誤的相當簡單的方法，沒有任何校正功能。奇偶校驗在添加到傳輸數據字符串的單個數據位中表示。如果模塊通常具有七個數據位，則將八分之一添加為奇偶校驗位。如果模塊通常有八個芯片用於數據，則將第九個芯片用於奇偶校驗。</p>
 <p>每個字節都有一個與之關聯的奇偶校驗位。在七位組成原始數據的情況下，總共傳輸了八位（七位原始數據位加一個奇偶校驗位）。在八位組成原始數據的情況下，總共傳輸九位（八位數據位加一位奇偶校驗位）。奇偶校驗位在寫入時設置，然後在讀取時進行計算和比較，以確定自存儲數據以來是否有任何位發生了更改。這種類型的檢查僅限於檢測單個位錯誤。如果更改了兩位，則奇偶校驗將“通過”，並且允許該錯誤可能破壞數據。</p>
 <p>奇偶校驗可以實現為“ 0”奇偶校驗或“ 1”奇偶校驗。存儲字節時，將加零（如果選擇了“ 1”奇偶校驗，則為零）的數目。結果存儲在奇偶校驗位中-如果為奇數，則為“ 1”；如果為偶數，則為“ 0”。當從內存中讀取該字節時，將再次對這些位進行計數，並將結果與奇偶校驗位中存儲的結果進行比較。匹配表示數據從存儲時起就沒有改變（或者以結果相同的方式更改了兩位）。</p>
 <p>不管發送的原始數據位數如何，確定奇偶校驗位的過程都是相同的。通常，原始數據有七位或八位。</p>
-<p>奇偶校驗位是通過對數據字符串中“ 1”位的數量進行計數來確定的。</p><h3>安裝記憶體模組</h3>
-<h3>介紹 BIOS CMOS 與軟體</h3>
-<h3>互補金屬氧化物半導體</h3>
-<h3>配置系統BIOS</h3>
-<h3>啟動自我檢測和錯誤報告</h3>
-<h3>BIOS更新</h3>
+<p>奇偶校驗位是通過對數據字符串中“ 1”位的數量進行計數來確定的。</p>
+<table style="width: 408px;">
+<tbody>
+<tr style="height: 14.8864px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;"></td>
+<td colspan="2" style="width: 172px; height: 14.8864px; border-color: #000000; background-color: #e1f7ff; text-align: center;">將奇偶校驗位設置為：</td>
+</tr>
+<tr style="height: 14px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;"></td>
+<td style="width: 172px; height: 14px; border-color: #000000; background-color: #e1f7ff; text-align: center;">偶同位</td>
+<td style="width: 172px; height: 14px; border-color: #000000; background-color: #e1f7ff; text-align: center;"><span>奇同位</span></td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;">偶數個1位元</td>
+<td style="width: 111.273px; height: 15px; text-align: center;">0</td>
+<td style="width: 103.727px; height: 15px; text-align: center;">1</td>
+</tr>
+<tr style="height: 15px;">
+<td style="width: 172px; height: 15px; border-color: #000000; background-color: #e1f7ff; text-align: center;"><span>奇數個1位元</span></td>
+<td style="width: 111.273px; height: 15px; text-align: center;">1</td>
+<td style="width: 103.727px; height: 15px; text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left;">範例:</p>
+<p style="text-align: left;">使用偶校驗發送八位原始數據11110000。 要確定奇偶校驗位（數據的第9位），請計算數據字符串中“ 1”位的數量。 在這種情況下，有四個“ 1”位。 因為“ 1”位的總數是四，所以數據是偶數。 因此，奇偶校驗位設置為0。</p>
+<p style="text-align: center;"><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image17.png"/></p>
+<p style="text-align: left;"><span>範例:</span></p>
+<p style="text-align: left;"><span>使用奇偶校驗傳輸七位原始數據1000010。 要確定奇偶校驗位（數據的第八位），請計算數據串中“ 1”位的數量。 在這種情況下，有兩個“ 1”位。 因此，將奇偶校驗位設置為1，因為數據中“ 1”位（兩個）的總數是偶數，這與傳輸的奇數奇偶校驗不匹配。 由於“ 1”位的數量和奇偶校驗設置（奇數）不匹配，因此必須將奇偶校驗位設置為1。由於“ 1”位的總數為2，因此將奇偶校驗位“ 1”添加到 該字符串將在整個八位字符串（七個數據位加一個奇偶校驗位）中產生奇數個“ 1”位（三個）。</span></p>
+<p style="text-align: center;"><span><img height="76" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image18.png" width="448"/></span></p>
+<p style="text-align: left;"><span>由於所有軟錯誤中大約90％是單比特類型的，因此奇偶校驗通常在大多數情況下就足夠了。 不幸的是，由於要花費額外的時脈來計算，存儲和獲取奇偶校驗位，因此錯誤檢查要付出一定的代價，這會稍微降低性能。 另一個考慮因素是，由於無法通過奇偶校驗解決錯誤，因此實際上必須停止應用程序，並發出一條錯誤消息，指出遇到奇偶校驗錯誤。</span></p>
+<table class="table labeled" id="N10711_bx">
+<tbody>
+<tr>
+<td>
+<table align="center" cellspacing="0" class="wbtable" lang="" style="width: 556px;">
+<thead>
+<tr style="height: 28.6137px;">
+<th lang="" style="background-color: #e1f7ff; height: 28.6137px; width: 63px;">原始數據</th>
+<th lang="" style="background-color: #e1f7ff; height: 28.6137px; width: 82px;">Count of “1” bits</th>
+<th colspan="2" lang="" style="background-color: #e1f7ff; height: 28.6137px; width: 393px;">傳輸的位元（8位或9位，取決於原始位的數量），包括奇偶校驗</th>
+</tr>
+<tr style="height: 28px;">
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 63px;"></th>
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 82px;"></th>
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 203.818px;"><span>偶同位</span></th>
+<th lang="" style="background-color: #e1f7ff; height: 28px; width: 189.182px;"><span>奇同位</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="e" style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">0000000</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">0</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">00000000</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">00000001</td>
+</tr>
+<tr style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">0101101</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">4</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">01011010</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">01011011</td>
+</tr>
+<tr class="e" style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">0101010</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">3</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">01010101</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">01010100</td>
+</tr>
+<tr style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">10000000</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">1</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">10000001</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">100000000</td>
+</tr>
+<tr class="e" style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">11111100</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">6</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">111111000</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">111111001</td>
+</tr>
+<tr style="height: 14px;">
+<td lang="" style="height: 14px; width: 63px; text-align: center;">10001100</td>
+<td lang="" style="height: 14px; width: 82px; text-align: center;">3</td>
+<td lang="" style="height: 14px; width: 203.818px; text-align: center;">100011001</td>
+<td lang="" style="height: 14px; width: 189.182px; text-align: center;">100011000</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left;">錯誤更正碼（ECC）使奇偶校驗概念更進一步，不僅可以識別錯誤，還可以糾正問題。 要確定是否由於奇偶校驗而對原始數據進行了校正或更改，請檢查完整的傳輸數據字符串，包括奇偶校驗位。</p>
+<p style="text-align: left;">範例:</p>
+<p style="text-align: left;">使用偶校驗發送111100000。 要確定是否在傳輸過程中更改了內存，請計算數據字符串中包括奇偶校驗位的“ 1”位的數量。 在這種情況下，有四個“ 1”位。 由於數據中的“ 1”位（四位）總數為偶數，與傳輸的偶數奇偶校驗相匹配，因此未更改任何存儲器。</p>
+<p style="text-align: center;"><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image19.png"/></p>
+<p><span>範例:</span></p>
+<p><span>使用奇偶校驗發送10000100。 要確定是否在傳輸過程中更改了內存，請計算數據字符串中包括奇偶校驗位的“ 1”位的數量。 在這種情況下，有兩個“ 1”位。 數據中“ 1”位的總數（兩個）是偶數，與傳輸的奇數奇偶校驗不匹配。 因此，內存已更改。</span></p>
+<p style="text-align: center;"><span><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image20.png"/></span></p>
+<h4 style="text-align: left;"><span>單面和雙面存儲器</span></h4>
+<p>內存可以是單面或雙面的。 雙面模塊的好處在於，單個芯片和單個插槽中可以容納更多的存儲空間。 有些主板支持雙面SIMM，而其他主板則不支持，因此查看主板手冊以獲取指導很重要。 要確定模塊是否雙面，只需查看一下雙面即可。 如果芯片的兩面都焊接，則為雙面SIMM。</p>
+<p style="text-align: center;"></p>
+<p style="text-align: center;"></p>
+<p style="text-align: center;"></p>
+<p style="text-align: center;"></p><h3>安裝記憶體模組</h3>
+<p>安裝內存是計算機的常見升級，並且是很容易執行的任務。 內存模塊作為內存的“模板”（或模塊）安裝在主板上的“插槽”中。</p>
+<p style="text-align: center;"><img alt="Photograph of memory modules or “sticks.”" class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image8.png" title="Photograph of memory modules or “sticks.”"/></p>
+<p>安裝記憶模板的過程相當容易，但是必須謹慎且精確。 要安裝記憶模板（或模塊）：</p>
+<p>始終確保採取適當的ESD（靜電釋放）保護措施，以確保在安裝過程中不會損壞主板和內存模塊。<br/>關閉計算機電源，然後拔下電源線。<br/>打開外殼，開始安裝記憶模板。 始終將記憶模版放在芯片的側面，而不要緊握金觸點。<br/>將內存模塊的連接器與主板上的插槽對齊。<br/>確認鎖定卡舌處於打開位置。<br/>垂直向下推動模塊，直到卡舌旋轉到鎖定位置（需要用力）。<br/>重要說明：切勿觸摸模塊上的金色連接器！ 觸點可能會腐蝕，或者由於靜電放電會損壞模塊。</p>
+<p>要了解有關如何安裝RAM的更多信息，請訪問www.wikihow.com/Install-RAM。</p>
 <p></p>
+<p></p>
+<p></p>
+<p></p><h3>介紹 BIOS CMOS 與軟體</h3>
+<p>開啟計算機後，計算機的微處理器會使用稱為BIOS（基本輸入/輸出系統）的程序來啟動計算機系統。 BIOS還管理計算機操作系統和已連接/已連接的設備（例如硬盤驅動器，視頻適配器，鍵盤，鼠標和打印機）之間的數據流。</p>
+<p style="text-align: center;"><img alt="Photograph of a basic input/output system    (BIOS) chip." class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image9.png" title="Photograph of a basic input/output system    (BIOS) chip."/></p>
+<p>計算機的BIOS是最常見的固件示例。 固件是芯片上的軟件，是計算機啟動時計算機運行的第一個軟件。 BIOS具有多個角色，包括執行開機自檢，該自檢將測試並初始化處理器，視頻卡，磁盤驅動器和適配器。 BIOS還包括計算機的低級“操作系統”，它使計算機可以從最基本的組件（包括鍵盤，鼠標和磁盤驅動器）獲取輸入並提供輸出。 BIOS存儲在ROM（只讀存儲器）芯片中，但可以通過過程調用“刷新”進行升級。</p>
+<p>BIOS是允許用戶更改設置的程序，而設置本身則存儲在互補金屬氧化物半導體或CMOS中。 CMOS是電池供電的存儲芯片。</p>
+<h4>認識BIOS和CMOS</h4>
+<p>BIOS用於配置通用設置，例如計算機讀取設備的順序。 此命令稱為引導命令。 此外，BIOS還用於配置打開和關閉各種輸入/輸出端口的設置，以及各種CPU設置（例如虛擬化和超頻）的配置。</p>
+<p>更改BIOS時要非常小心。 不正確的設置可能會使您的計算機無法啟動。</p>
+<p style="text-align: center;"><img alt="Photograph of a basic       input/output system (BIOS) setup utility." class="popimg" id="_i_2" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image10.png" title="Photograph of a basic       input/output system (BIOS) setup utility."/></p>
+<p>BIOS配置以下設置：</p>
+<p>●引導順序<br/><span>●</span>存儲設備（USB驅動器，硬盤驅動器，軟盤驅動器，光盤驅動器）<br/><span>●</span>內置端口（SATA，eSATA，PATA，USB，IEEE-1394，串行，並行，PS / 2）<br/><span>●</span>AGP，PCI，PCIe插槽<br/><span>●</span>集成芯片組（音頻，視頻，網絡）<br/><span>●</span>虛擬化<br/><span>●</span>時脈速度<br/><span>●</span>記憶體（RAM）<br/><span>●</span>能源管理<br/><span>●</span>入侵檢測<br/><span>●</span>密碼和加密<br/><span>●</span>PC健康工具（溫度，電壓等）<br/><span>●</span>直接訪問Web或其他服務，而無需啟動計算機（特定於UEFI）</p>
+<p><br/>當按下計算機上的電源按鈕時，引導過程的第一步是開機自檢，稱為POST。 成功進行POST後，BIOS從CMOS讀取設置，BIOS從配置的引導設備中查找操作系統。 找到操作系統後，操作系統的引導加載程序將開始進行操作系統引導過程，並將計算機的控制權移交給操作系統。</p>
+<p style="text-align: center;"><img alt="Graphic depiction of the boot      process starting with BIOS, moving to OS loader code and ending with OS      start." class="popimg" id="_i_4" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image11.png" title="Graphic depiction of the boot      process starting with BIOS, moving to OS loader code and ending with OS      start."/></p>
+<p>開機過程：</p>
+<p>1.打開計算機電源。<br/>2.BIOS執行開機自檢（POST）。<br/>3.BIOS從CMOS讀取設置。<br/>4.BIOS從配置的引導設備中查找操作系統。</p>
+<p></p>
+<p></p>
+<p></p><h3>互補金屬氧化物半導體</h3>
+<p>CMOS（互補金屬氧化物半導體）是電池供電的存儲芯片。 它是非易失性存儲器，用於存儲BIOS設置，並內置在主板中。 只要電池電量剩餘，就會向CMOS提供DC（直流電）並保留設置。 如果計算機不斷丟失設置，則需要更換電池。 較舊的CMOS電池型號使用DS12887A電池或AA尺寸的3.6伏Eternacell電池，通常可以使用大約三年。 較新的CMOS型號包括內置鋰離子電池，該電池可使用長達10年。 當前使用的最典型的外部電池是CR2032，它類似於標準的手錶電池。 當電池開始出現故障時，向用戶顯示的第一個信號是系統時脈經常浪費時間。</p>
+<p style="text-align: center;"><img src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image12.png"/></p>
+<p style="text-align: left;"></p><h3>配置系統BIOS</h3>
+<p>要更改CMOS中的設置，用戶需要進入BIOS。 為此，用戶必須在計算機製造商設置的開機過程中按下有效的鍵或組合鍵。 用於進入BIOS的最常用鍵是F2和/或Delete。 通常，在開機過程中，進入BIOS所需的擊鍵將顯示在監視器上。 如果未顯示擊鍵，則快速搜索製造商的網站通常會告訴用戶輸入BIOS所需的擊鍵。</p>
+<p style="text-align: center;"><img alt="Photograph of a boot screen, which    displays the required keystroke to enter the BIOS." class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image13.png" title="Photograph of a boot screen, which    displays the required keystroke to enter the BIOS."/></p>
+<p style="text-align: left;">BIOS界面和用於進入BIOS的擊鍵取決於BIOS製造商。 下面是來自兩個不同製造商的BIOS接口的圖像。 請注意，儘管兩者之間的可用信息是一致的，但界面略有不同。</p>
+<p style="text-align: center;"><img alt="A computer screen showing the system BIOS setup utility for the Phoenix Award BIOS with 'System Info' highlighted." class="popimg" id="_i_2" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image21.jpg" title="A computer screen showing the system BIOS setup utility for the Phoenix Award BIOS with 'System Info' highlighted."/></p>
+<p style="text-align: center;"><img alt="A computer screen showing the system BIOS setup utility for a Dell 4700 computer." class="popimg" id="_i_3" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image22.png" title="A computer screen showing the system BIOS setup utility for a Dell 4700 computer."/></p>
+<h4 style="text-align: left;"><b>統一可延伸韌體介面 </b>UEFI</h4>
+<p>傳統上，只有一種類型的BIOS，它完全依賴於基於文本的菜單和用於輸入的鍵盤。 最近，大多數BIOS製造商已切換到統一的可延伸韌體介面或UEFI。 此更新的BIOS允許鍵盤和鼠標輸入，並提供GUI而不是標準的基於文本的菜單。 支持GUID分區表（GPT），允許訪問最大2 TB的磁盤，並向後兼容舊分區結構（例如主啟動記錄（MBR）和Linux的GRand Unified Bootloader（GRUB）；從可移動媒體啟動；用戶界面） 允許在線連接以進行Web訪問，診斷和文件管理；以及安全啟動（Secure Boot），可防止操作系統前代碼被修改；其中某些UEFI BIOS還包括允許用戶上網，玩基本遊戲和使用的軟件。 無需進入正常操作系統即可備份程序。</p>
+<p style="text-align: center;"><img class="popimg" id="_i_4" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/efi-simple.png" width="200"/></p>
+<h4 style="text-align: left;">自動配置BIOS與CMOS</h4>
+<p>自動配置是某些BIOS的功能。 儘管自動BIOS配置並不總是會創建最佳設置，但是如果發生重大錯誤以將安全回滾創建到已知的良好狀態，它可能會非常有用。 自動配置選項包括BIOS默認設置（原始/故障安全設置）和設置默認設置（最佳設置）。 通常有一個turbo設置，可以快速配置以實現更快的系統。 在對系統進行故障排除時，BIOS的自動配置通常很有用。</p>
+<p style="text-align: center;"><img alt="Screenshot displaying      configuration of BIOS settings with a “setup confirmation” dialog box      asking “Save configuration changes and exit now?” and the selection of      yes or no." class="popimg" id="_i_7" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image15.png" title="Screenshot displaying      configuration of BIOS settings with a “setup confirmation” dialog box      asking “Save configuration changes and exit now?” and the selection of      yes or no."/></p>
+<p style="text-align: left;"></p>
+<p></p><h3>啟動自我檢測和錯誤報告</h3>
+<p>開機時，POST（開機自檢）是計算機基本輸入/輸出系統（或“啟動程序”）運行以確定計算機鍵盤，隨機存取存儲器，磁盤驅動器的診斷測試順序。 ，並且其他硬件運行正常。 POST是BIOS在引導時執行的初始測試。 POST的作用是查找硬件錯誤，並報告這些錯誤。 POST檢查以下內容：</p>
+<p><span>●</span>CPU和部分BIOS<br/><span>●</span>系統時間<br/><span>●</span>視頻顯示卡<br/><span>●</span>記憶<br/><span>●</span>鍵盤<br/><span>●</span>磁盤驅動器</p>
+<p>如果檢測到必要的硬件並發現其運行正常，則計算機將開始啟動。如果未檢測到硬件或發現硬件運行不正常，BIOS將發出錯誤消息。根據問題的性質，此錯誤消息可能是顯示屏上的文本和/或一系列編碼的嗶聲。由於POST在激活計算機的視頻卡之前運行，因此可能無法進入顯示屏幕。嗶聲的模式可以是可變數目的短嗶聲，也可以是長短嗶聲的混合，具體取決於安裝的BIOS類型。嗶聲的模式包含有關所檢測問題性質的消息。例如，如果未檢測到鍵盤，則特定的嗶嗶聲將告知您該事實。在POST中發現的錯誤通常是致命的（也就是說，它導致當前程序停止運行），並且將終止引導過程，因為檢查的硬件對於計算機的功能絕對必要。</p>
+<p>嗶聲的模式類似於摩爾斯電碼。嗶聲的數量和順序具有計算機製造商設定的含義。因此，每個嗶嗶聲的含義因製造商而異。包含一些AMI和Dell嗶聲代碼的圖表如下所示。</p>
+<h4>代碼比較表</h4>
+<table align="center" cellspacing="0" class="wbtable" lang="">
+<thead>
+<tr style="height: 14px;">
+<th align="center" lang="" style="background-color: #d7f5fc; height: 14px;"><em lang="">BEEP CODE</em></th>
+<th align="center" lang="" style="background-color: #d7f5fc; height: 14px;"><em lang="">AMI</em></th>
+<th align="center" lang="" style="background-color: #d7f5fc; height: 14px;"><em lang="">DELL</em></th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">1</td>
+<td lang="" style="height: 14px;">DRAM refresh failure</td>
+<td lang="" style="height: 14px;">BIOS ROM corruption or failure</td>
+</tr>
+<tr class="e" style="height: 14.7046px;">
+<td align="center" lang="" style="height: 14.7046px;">2</td>
+<td lang="" style="height: 14.7046px;">Parity circuit failure</td>
+<td lang="" style="height: 14.7046px;">RAM not detected</td>
+</tr>
+<tr style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">3</td>
+<td lang="" style="height: 14px;">Base 64K RAM failure</td>
+<td lang="" style="height: 14px;">Motherboard failure</td>
+</tr>
+<tr class="e" style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">4</td>
+<td lang="" style="height: 14px;">System timer failure</td>
+<td lang="" style="height: 14px;">RAM failure</td>
+</tr>
+<tr style="height: 14px;">
+<td align="center" lang="" style="height: 14px;">5</td>
+<td lang="" style="height: 14px;">Process failure</td>
+<td lang="" style="height: 14px;">CMOS battery failure</td>
+</tr>
+</tbody>
+</table>
+<p>範例</p>
+<p>嗶聲代碼<br/>這是有問題的計算機發出的嗶嗶代碼示例：</p>
+<p>此蜂鳴聲代碼包含兩個短蜂鳴聲。 這個POST嗶嗶聲序列是什麼意思？ 這取決於BIOS的製造商。</p>
+<p>使用搜索引擎搜索“ AMI嗶聲代碼”。 這可能是典型的結果。 該網站告訴我們，在AMI計算機上，兩聲短促的嗶嗶聲表示內存奇偶校驗錯誤。</p>
+<p>現在搜索“ AST Research BIOS嗶聲代碼”。 這是一個典型的結果。 該網站告訴我們，在AST Research BIOS計算機上，兩聲短促的嗶嗶聲表示鍵盤控制器緩衝區故障。</p>
+<p>如果在Internet上搜索“ IBM bios嗶聲代碼”，則表明該嗶聲代碼指示POST錯誤，因此您應該在屏幕上查看錯誤代碼。</p>
+<p>在POST期間診斷問題時，了解BIOS製造商很重要，因為嗶嗶代碼的含義因製造商而異。</p><h3>BIOS更新</h3>
+<p>那麼如何更新BIOS？ 記得BIOS是固件或芯片上的軟件。 出現電源管理問題或處理器升級時，BIOS需要更新。 請始終在製造商的網站上查看最新固件版本。 在舊系統（1980年代至1990年代）中，實際的BIOS芯片必須完全更換。 在較新的系統中，BIOS被“刷新”。 刷新是一個特殊的過程，其中BIOS被覆蓋，除非絕對必要，否則不應該這樣做。 始終確保在執行BIOS刷新之前備份信息； 如果無法成功進行閃爍，則係統將無法恢復，甚至無法啟動。</p>
+<p style="text-align: center;"><img alt="Photograph showing updating of BIOS    settings." class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image16.png" title="Photograph showing updating of BIOS    settings."/></p>

@@ -134,6 +134,23 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">安裝記憶體模組 << <a href='安裝記憶體模組.html'>Previous</a> <a href='互補金屬氧化物半導體.html'>Next</a> >> 互補金屬氧化物半導體<br /><h1>介紹 BIOS CMOS 與軟體</h1>
+<p><span>      </span>開啟計算機後，計算機的微處理器會使用稱為BIOS（基本輸入/輸出系統）的程序來啟動計算機系統。 BIOS還管理計算機操作系統和已連接/已連接的設備（例如硬盤驅動器，視頻適配器，鍵盤，鼠標和打印機）之間的數據流。</p>
+<p style="text-align: center;"><img alt="Photograph of a basic input/output system    (BIOS) chip." class="popimg" id="_i_0" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image9.png" title="Photograph of a basic input/output system    (BIOS) chip."/></p>
+<p><span>      </span>計算機的BIOS是最常見的固件示例。 固件是芯片上的軟件，是計算機啟動時計算機運行的第一個軟件。 BIOS具有多個角色，包括執行開機自檢，該自檢將測試並初始化處理器，視頻卡，磁盤驅動器和適配器。 BIOS還包括計算機的低級“操作系統”，它使計算機可以從最基本的組件（包括鍵盤，鼠標和磁盤驅動器）獲取輸入並提供輸出。 BIOS存儲在ROM（只讀存儲器）芯片中，但可以通過過程調用“刷新”進行升級。</p>
+<p><span>      </span>BIOS是允許用戶更改設置的程序，而設置本身則存儲在互補金屬氧化物半導體或CMOS中。 CMOS是電池供電的存儲芯片。</p>
+<h4>認識BIOS和CMOS</h4>
+<p><span>      </span>BIOS用於配置通用設置，例如計算機讀取設備的順序。 此命令稱為引導命令。 此外，BIOS還用於配置打開和關閉各種輸入/輸出端口的設置，以及各種CPU設置（例如虛擬化和超頻）的配置。</p>
+<p>更改BIOS時要非常小心。 不正確的設置可能會使您的計算機無法啟動。</p>
+<p style="text-align: center;"><img alt="Photograph of a basic       input/output system (BIOS) setup utility." class="popimg" id="_i_2" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image10.png" title="Photograph of a basic       input/output system (BIOS) setup utility."/></p>
+<p>BIOS配置以下設置：</p>
+<p>●引導順序<br/><span>●</span>存儲設備（USB驅動器，硬盤驅動器，軟盤驅動器，光盤驅動器）<br/><span>●</span>內置端口（SATA，eSATA，PATA，USB，IEEE-1394，串行，並行，PS / 2）<br/><span>●</span>AGP，PCI，PCIe插槽<br/><span>●</span>集成芯片組（音頻，視頻，網絡）<br/><span>●</span>虛擬化<br/><span>●</span>時脈速度<br/><span>●</span>記憶體（RAM）<br/><span>●</span>能源管理<br/><span>●</span>入侵檢測<br/><span>●</span>密碼和加密<br/><span>●</span>PC健康工具（溫度，電壓等）<br/><span>●</span>直接訪問Web或其他服務，而無需啟動計算機（特定於UEFI）</p>
+<p><br/><span>      </span>當按下計算機上的電源按鈕時，引導過程的第一步是開機自檢，稱為POST。 成功進行POST後，BIOS從CMOS讀取設置，BIOS從配置的引導設備中查找操作系統。 找到操作系統後，操作系統的引導加載程序將開始進行操作系統引導過程，並將計算機的控制權移交給操作系統。</p>
+<p style="text-align: center;"><img alt="Graphic depiction of the boot      process starting with BIOS, moving to OS loader code and ending with OS      start." class="popimg" id="_i_4" onclick="loadImageFromPage(this);" src="https://oli.cmu.edu/repository/webcontent/d826575d0a0001dc3e9f244fa018c560/PCH06/webcontent/PCH06/image11.png" title="Graphic depiction of the boot      process starting with BIOS, moving to OS loader code and ending with OS      start."/></p>
+<p>開機過程：</p>
+<p>1.打開計算機電源。<br/>2.BIOS執行開機自檢（POST）。<br/>3.BIOS從CMOS讀取設置。<br/>4.BIOS從配置的引導設備中查找操作系統。</p>
+<p></p>
+<p></p>
+<p></p>
 <br />安裝記憶體模組 << <a href='安裝記憶體模組.html'>Previous</a> <a href='互補金屬氧化物半導體.html'>Next</a> >> 互補金屬氧化物半導體</div>
         
     <!-- footer -->
